@@ -35,6 +35,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/mascotas', 'ControladorMascota::index');
 $routes->post('/mascotas/agregar', 'ControladorMascota::agregarMascota');
+$routes->put('/mascotas/editar/(:any)', 'ControladorMascota::editarMascota/$1');
 
 /*
  * --------------------------------------------------------------------

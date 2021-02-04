@@ -16,7 +16,6 @@ class ControladorMascota extends ResourceController
 
     public function agregarMascota()
     {
-        //$id = $this->resquest->getPost('id');
         $nombre = $this->request->getPost('nombre');
         $edad = $this->request->getPost('edad');
         $tipo = $this->request->getPost('tipo');
@@ -24,7 +23,6 @@ class ControladorMascota extends ResourceController
         $comida = $this->request->getPost('comida');
 
         $datosAgregar = [
-            //'id'=>$id,
             'nombre'=>$nombre,
             'edad'=>$edad,
             'tipo'=>$tipo,
@@ -41,4 +39,26 @@ class ControladorMascota extends ResourceController
             return $this->respond($validation->getErrors(),400);
         }
     }
+
+    public function editarMascota($id)
+    {
+        $datosActuales = $this->request->getRawInput();
+        $datosEditar = [
+            'nombre'=>$datosActuales['nombre'],
+            'edad'=>$datosActuales['edad'],
+            'tipo'=>$datosActuales['tipo'],
+            'descripcion'=>$datosActuales['descripcion'],
+            'comida'=>$datosActuales['comida']
+        ];
+        if ($this->validate('verificarEntradas')) {
+            $this->model->update($id, $datosEditar);
+            $mensaje = array('estado'=>true,'mensaje'=>"Registro editado con éxito");
+            return $this->respond($mensaje);
+        } else {
+            $validation = \Config\Services::validation();
+            return $this->respond($validation->getErrors(),400);
+        }
+        
+    }
+
 }
