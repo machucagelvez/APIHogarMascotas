@@ -37,6 +37,14 @@ class Validation
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
 
+	public $verificarEntradas = [
+		'nombre'=>'required',
+		'edad'=>'required',
+		'tipo'=>'required',
+		'descripcion'=>'required',
+		'comida'=>'required'
+	];
+
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
