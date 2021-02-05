@@ -32,7 +32,7 @@ class ControladorMascota extends ResourceController
 
         if ($this->validate('verificarEntradas')) {
             $this->model->insert($datosAgregar);
-            $mensaje = array('estado'=>true,'mensaje'=>"Registro agregado con exito");
+            $mensaje = array('estado'=>true,'mensaje'=>"Registro agregado con éxito");
             return $this->respond($mensaje);
         }else {
             $validation = \Config\Services::validation();
@@ -66,12 +66,24 @@ class ControladorMascota extends ResourceController
         $consulta = $this->model->where('id', $id)->delete();
         $filasAfectadas = $consulta->connID->affected_rows;
         if ($filasAfectadas==1) {
-            $mensaje = array('estado'=>true,'mensaje'=>"Registro eliminado con exito");
+            $mensaje = array('estado'=>true,'mensaje'=>"Registro eliminado con éxito");
             return $this->respond($mensaje);
         } else {
             $mensaje = array('estado'=>false,'mensaje'=>"No fue posible eliminar el registro");
             return $this->respond($mensaje,400);
         }
+        
+    }
+
+    public function buscarMascota($id)
+    {
+        if ($this->model->find($id)) {
+            return $this->respond($this->model->find($id));
+        } else {
+            $mensaje = array('estado'=>false,'mensaje'=>"La mascota con id número ".$id." no está registrada");
+            return $this->respond($mensaje,400);
+        }
+        
         
     }
 

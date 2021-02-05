@@ -37,6 +37,7 @@ $routes->get('/mascotas', 'ControladorMascota::index');
 $routes->post('/mascotas/agregar', 'ControladorMascota::agregarMascota');
 $routes->put('/mascotas/editar/(:any)', 'ControladorMascota::editarMascota/$1');
 $routes->delete('/mascotas/borrar/(:any)', 'ControladorMascota::borrarMascota/$1');
+$routes->get('/mascotas/buscar/(:any)', 'ControladorMascota::buscarMascota/$1');
 
 /*
  * --------------------------------------------------------------------
