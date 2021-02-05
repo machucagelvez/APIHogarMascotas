@@ -61,4 +61,18 @@ class ControladorMascota extends ResourceController
         
     }
 
+    public function borrarMascota($id)
+    {
+        $consulta = $this->model->where('id', $id)->delete();
+        $filasAfectadas = $consulta->connID->affected_rows;
+        if ($filasAfectadas==1) {
+            $mensaje = array('estado'=>true,'mensaje'=>"Registro eliminado con exito");
+            return $this->respond($mensaje);
+        } else {
+            $mensaje = array('estado'=>false,'mensaje'=>"No fue posible eliminar el registro");
+            return $this->respond($mensaje,400);
+        }
+        
+    }
+
 }
